@@ -6,12 +6,14 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
-export default function App(){
+export default class App extends Component {
+  render() {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Home" component={LoginPage}/>
-        </Stack.Navigator> 
+        <Stack.Navigator screenOptions={{headerShown: false}}>
+          <Stack.Screen name="Login" component={LoginPage}/>
+        </Stack.Navigator>
       </NavigationContainer>
     );
+  }
 }

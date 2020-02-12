@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
-import { View, TextInput, Button } from 'react-native';
+import { View, TextInput, Button, Image } from 'react-native';
+import url from './Configuration.js';
 
+const login = () => {
+  fetch(url);
+}
 
 export default function LoginPage({navigation}) {
   return (
     <View>
+      <View style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        <Image style = {{}} source={require('../images/pokemon-go-logo.png')} />
+      </View>
       <TextInput placeholder="Username"/>
-      <TextInput placeholder="Password"/>
-      <Button title="Login"/>
+      <TextInput secureTextEntry={true} placeholder="Password"/>
+      <View style={{display: 'flex', justifyContent: 'center', flexDirection: 'row', alignItems: 'flex-end'}}>
+          <Button title="Login"/>
+          <Button color="red" title="Register"/>
+      </View>
     </View>
   );
 }
