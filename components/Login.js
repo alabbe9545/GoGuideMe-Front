@@ -12,7 +12,7 @@ export default function LoginPage({navigation}) {
       <View style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
         <Image style = {{}} source={require('../images/pokemon-go-logo.png')} />
       </View>
-      <TextInput placeholder="Username"/>
+      <TextInput placeholder="Email"/>
       <TextInput secureTextEntry={true} placeholder="Password"/>
       <View style={{display: 'flex', justifyContent: 'center', flexDirection: 'row', alignItems: 'flex-end'}}>
           <Button title="Login"/>
