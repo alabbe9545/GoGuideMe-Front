@@ -1,3 +1,3 @@
-const url = '127.0.0.1:8000';
+const url = 'http://192.168.178.123:8000';
 
 export default url;
