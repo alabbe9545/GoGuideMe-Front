@@ -3,6 +3,8 @@ import { Platform, StyleSheet, Text, View } from 'react-native';
 import LoginPage from './components/Login';
 import Register from './components/Register';
 import Main from './components/Main';
+import Description from './components/Description';
+import ZoneDescription from './components/ZoneDescription';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
@@ -16,6 +18,8 @@ export default class App extends Component {
           <Stack.Screen name="Login" component={LoginPage}/>
           <Stack.Screen name="Register" component={Register}/>
           <Stack.Screen name="Main" component={Main}/>
+          <Stack.Screen name="Description" component={Description}/>
+          <Stack.Screen name="ZoneDescription" component={ZoneDescription}/>
         </Stack.Navigator>
       </NavigationContainer>
     );

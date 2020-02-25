@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from 'react';
-import { View, TextInput, Button, Image, BackHandler, Text } from 'react-native';
+import { View, TextInput, Button, Image, BackHandler, Text, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {url} from './Configuration.js';
 
@@ -27,13 +27,19 @@ export default function Main({navigation}) {
     data['headers']['Content-Type'] = 'application/json';
     data['headers']['Authorization'] = 'Bearer '+ token;
 
-    let promise = fetch(url+'/api/countries', data).then((response) => response.json())
+    let promise = fetch(url+'/api/countries', data)
+      .then((response) => {
+        if(response.status == 401){
+          navigation.navigate('Login');
+          return [];
+        }
+        else return response.json();
+      })
       .then((responseJson) => {
-        console.log(responseJson);
         setCountries(responseJson);
       })
       .catch((error) => {
-        console.error(error);
+        console.log(error);
       });
   }
 
@@ -52,13 +58,19 @@ export default function Main({navigation}) {
   }, [token]);
 
   return (
-    <View>
-        {countries.map((country)=>(
-          <View key={country.name}>
-            <Text>{country.name}</Text>
-            <Image source={{uri: `${url}/${country.foto_path}`}} style={{ width: 200, height: 200 }} />
-            <Text>{country.description}</Text>
-          </View>))}
-    </View>
+    <SafeAreaView>
+      <ScrollView>
+        <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', flexWrap: 'wrap' }}>
+          {countries.map((country)=>(
+            <TouchableOpacity key={country.name+country.id} onPress={()=>navigation.navigate('Description', {country: country})}>
+              <View style={{ display: 'flex', flexDirection: 'column' }} >
+                <Text style = {{ fontWeight: 'bold', textAlign: 'center' }}>{country.name}</Text>
+                <Image source={{uri: `${url}/${country.foto_path}`}} style={{ width: 100, height: 100, borderRadius: 60 }} />
+              </View>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
