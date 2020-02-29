@@ -27,6 +27,9 @@ export default function ZoneDescription({navigation: { goBack }, route}) {
   const [token, setToken] = useState("");
   const [attractions, setAttractions] = useState([]);
   const [center, setCenter] = useState([]);
+  const [zoom, setZoom] = useState(7);
+  const [attractionIcon, setAttractionIcon] = useState("");
+  const [attractionPoint, setAttractionPoint] = useState("");
   const zone = route.params.zone;
   let backHandler = '';
 
@@ -117,6 +120,15 @@ export default function ZoneDescription({navigation: { goBack }, route}) {
     getAttractions();
   }, [token]);
 
+const point = [9.907919, 53.601542];
+  const renderAttraction = () => {
+  	if(attractionPoint != ""){
+        return (<MapboxGL.ShapeSource id='markers_shapesource' shape={attractionPoint}>
+			<MapboxGL.SymbolLayer id="markers_symbollayer" style={{iconImage: attractionIcon, iconSize: 0.2}}/>
+		</MapboxGL.ShapeSource>)
+	}
+  }
+
   return (
     <ImageBackground source={{uri: `${url}/${zone.foto_path}`}} style={{width: '100%', height: '100%'}}>
       <View style={{ backgroundColor:'rgba(0,0,0, 0.8)', width: '100%', height: '100%' }}>
@@ -131,7 +143,8 @@ export default function ZoneDescription({navigation: { goBack }, route}) {
               <Text style={{ textAlign: 'center', fontSize: 24, color: 'white' }}>Attractions</Text>
               <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', flexWrap: 'wrap' }}>
                 {attractions.map((attraction)=>(
-                  <TouchableOpacity key={attraction.name+attraction.id}>
+                  <TouchableOpacity key={attraction.name+attraction.id} 
+                  	onPress={()=>{setAttractionPoint(attraction.location);setAttractionIcon(`${url}/${attraction.icon_path}`); setZoom(15); setCenter(attraction.location.coordinates) }}>
                     <View style={{ display: 'flex', flexDirection: 'column' }} >
                       <Text style = {{ fontWeight: 'bold', textAlign: 'center', color: 'white' }}>{attraction.name}</Text>
                       <Image source={{uri: `${url}/${attraction.foto_path}`}} style={{ width: 50, height: 50, borderRadius: 50 }} />
@@ -143,10 +156,13 @@ export default function ZoneDescription({navigation: { goBack }, route}) {
             <View style={styles.page}>
 		        <View style={styles.container}>
 		        	<MapboxGL.MapView style={styles.map}>
-		        		<MapboxGL.Camera zoomLevel={7} centerCoordinate={center} />
+		        		<MapboxGL.Camera zoomLevel={zoom} centerCoordinate={center} />
 			            <MapboxGL.ShapeSource id='polygonSource' shape={polygon}>
 			              <MapboxGL.FillLayer id='polygonSourceFill' style={layerStyles} />
 			            </MapboxGL.ShapeSource> 
+			            {
+			            	renderAttraction()
+      					}
 		        	</MapboxGL.MapView>
 		        </View>
 		    </View>
