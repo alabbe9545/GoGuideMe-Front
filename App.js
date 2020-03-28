@@ -5,6 +5,7 @@ import Register from './components/Register';
 import Main from './components/Main';
 import Description from './components/Description';
 import ZoneDescription from './components/ZoneDescription';
+import Map from './components/Map';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
@@ -20,6 +21,7 @@ export default class App extends Component {
           <Stack.Screen name="Main" component={Main}/>
           <Stack.Screen name="Description" component={Description}/>
           <Stack.Screen name="ZoneDescription" component={ZoneDescription}/>
+          <Stack.Screen name="Map" component={Map}/>
         </Stack.Navigator>
       </NavigationContainer>
     );

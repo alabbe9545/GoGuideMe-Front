@@ -2,6 +2,7 @@ import React, { Component, useState, useEffect } from 'react';
 import { View, TextInput, Button, Image, BackHandler, Text, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {url} from './Configuration.js';
+import NavigationBar from 'react-native-navbar';
 
 export default function Main({navigation}) {
   const [token, setToken] = useState("");
@@ -59,6 +60,8 @@ export default function Main({navigation}) {
 
   return (
     <SafeAreaView>
+      <NavigationBar rightButton={{title: 'Map',handler: () => navigation.navigate('Map')}} 
+          leftButton={{title: 'Awards',handler: () => navigation.navigate('Map')}}/>
       <ScrollView>
         <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', flexWrap: 'wrap' }}>
           {countries.map((country)=>(

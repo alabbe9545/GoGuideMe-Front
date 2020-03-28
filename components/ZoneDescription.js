@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default function ZoneDescription({navigation: { goBack }, route}) {
+export default function ZoneDescription({navigation: { goBack }, route, navigation}) {
   const [token, setToken] = useState("");
   const [attractions, setAttractions] = useState([]);
   const [center, setCenter] = useState([]);
@@ -120,7 +120,6 @@ export default function ZoneDescription({navigation: { goBack }, route}) {
     getAttractions();
   }, [token]);
 
-const point = [9.907919, 53.601542];
   const renderAttraction = () => {
   	if(attractionPoint != ""){
         return (<MapboxGL.ShapeSource id='markers_shapesource' shape={attractionPoint}>
