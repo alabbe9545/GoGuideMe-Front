@@ -3,8 +3,9 @@ import { View, TextInput, Button, Image, BackHandler, Text, SafeAreaView, Scroll
         ImageBackground, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {url} from './Configuration.js';
+import NavigationBar from 'react-native-navbar';
 
-export default function Description({navigation, route}) {
+export default function Description({navigation: { goBack }, navigation, route}) {
   const [token, setToken] = useState("");
   const [zones, setZones] = useState([]);
   const country = route.params.country;
@@ -56,6 +57,7 @@ export default function Description({navigation, route}) {
     <ImageBackground source={{uri: `${url}/${country.foto_path}`}} style={{width: '100%', height: '100%'}}>
       <View style={{ backgroundColor:'rgba(0,0,0, 0.8)', width: '100%', height: '100%' }}>
         <SafeAreaView>
+          <NavigationBar leftButton={{title: 'Back',handler: () => goBack()}} title={{title: 'GoGuideMe'}}/>
           <ScrollView>
             <View >
               <View>

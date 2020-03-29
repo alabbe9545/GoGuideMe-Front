@@ -144,10 +144,10 @@ export default function Map({navigation: { goBack }, route, navigation}) {
 
   	return (
         <View style={styles.container}>
-          <NavigationBar leftButton={{title: 'Back',handler: () => backFunction()}}/>
+          <NavigationBar leftButton={{title: 'Back',handler: () => backFunction()}} title={{title: 'GoGuideMe'}}/>
         	{selectedAttraction !== null &&
         		<View style={{position: 'absolute', zIndex: 1, backgroundColor: 'white', width: '100%', height: '100%'}}>
-        			<NavigationBar leftButton={{title: 'Back',handler: () => backFunction()}}/>
+        			<NavigationBar leftButton={{title: 'Back',handler: () => backFunction()}} title={{title: 'GoGuideMe'}}/>
         			<Image source={{uri: `${url}/${selectedAttraction.foto_path}`}} style={{ width: Dimensions.get('window').width, height: Dimensions.get('window').width/3 }} />
         			<ScrollView>
         				<View>

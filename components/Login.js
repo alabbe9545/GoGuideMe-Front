@@ -40,14 +40,20 @@ export default function LoginPage({navigation}) {
     data['body']['password'] = password;
     data['body'] = JSON.stringify(data['body']);
 
-    let promise = fetch(url+'/api/login', data).then((response) => response.json())
+    let promise = fetch(url+'/api/login', data)
+      .then((response) => {
+        if(response.status != 200){
+          throw response;
+        }
+        return response.json();
+      })
       .then((responseJson) => {
         let token = responseJson['success']['token'];
         storeToken(token);
         navigation.navigate('Main');
       })
       .catch((error) => {
-        console.error(error);
+        alert('Unauthorized');
       });
   }
 

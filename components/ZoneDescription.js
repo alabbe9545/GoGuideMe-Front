@@ -4,6 +4,7 @@ import { View, TextInput, Button, Image, BackHandler, Text, SafeAreaView, Scroll
 import AsyncStorage from '@react-native-community/async-storage';
 import {url} from './Configuration.js';
 import MapboxGL from "@react-native-mapbox-gl/maps"
+import NavigationBar from 'react-native-navbar';
 
 MapboxGL.setAccessToken('pk.eyJ1IjoiYWxhYmJlOTU0NSIsImEiOiJjazJnNXRzZXQwN3d4M2NwZmw1aGVkMjhyIn0.spxnZe5xKR3vSQ0VwSo1eA');
 
@@ -132,6 +133,7 @@ export default function ZoneDescription({navigation: { goBack }, route, navigati
     <ImageBackground source={{uri: `${url}/${zone.foto_path}`}} style={{width: '100%', height: '100%'}}>
       <View style={{ backgroundColor:'rgba(0,0,0, 0.8)', width: '100%', height: '100%' }}>
         <SafeAreaView>
+          <NavigationBar leftButton={{title: 'Back',handler: () => goBack()}} title={{title: 'GoGuideMe'}}/>
           <ScrollView>
             <View >
               <View>

@@ -6,6 +6,7 @@ import Main from './components/Main';
 import Description from './components/Description';
 import ZoneDescription from './components/ZoneDescription';
 import Map from './components/Map';
+import Awards from './components/Awards';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
@@ -22,6 +23,7 @@ export default class App extends Component {
           <Stack.Screen name="Description" component={Description}/>
           <Stack.Screen name="ZoneDescription" component={ZoneDescription}/>
           <Stack.Screen name="Map" component={Map}/>
+          <Stack.Screen name="Awards" component={Awards}/>
         </Stack.Navigator>
       </NavigationContainer>
     );
