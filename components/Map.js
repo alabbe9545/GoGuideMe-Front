@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from 'react';
 import { View, TextInput, Button, Image, BackHandler, Text, SafeAreaView, ScrollView, 
-        ImageBackground, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+        ImageBackground, TouchableOpacity, StyleSheet, Dimensions, Alert } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import AsyncStorage from '@react-native-community/async-storage';
 import {url} from './Configuration.js';
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 
 export default function Map({navigation: { goBack }, route, navigation}) {
 	const [token, setToken] = useState("");
-	const [position, setPosition] = useState([]);
+	const [position, setPosition] = useState([0, 0]);
 	const [map, setMap] = useState({});
 	const [nearAttractions, setNearAttractions] = useState([]);
 	const [selectedAttraction, setSelectedAttraction] = useState(null);
@@ -107,7 +107,7 @@ export default function Map({navigation: { goBack }, route, navigation}) {
 	        setPosition([position.coords.longitude, position.coords.latitude]);
 	      },
 	      error => Alert.alert('Error', JSON.stringify(error)),
-	      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+	      {enableHighAccuracy: false, timeout: 20000, maximumAge: 1000},
 	    );
   	}
 
